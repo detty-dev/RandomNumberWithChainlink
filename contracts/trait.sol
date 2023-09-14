@@ -1,8 +1,10 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@chainlink/contracts/src/v0.8/mocks/VRTConsumerBase.sol";
+import "@openzeppelin/contracts/token/ERC20/contracts/ERC20.sol";
+import "./Imint.sol";
 
 contract MyNFTTraitContract is ERC721Enumerable {
 
@@ -30,6 +32,7 @@ constructor(address vrfCoordinator, address _linkToken, bytes32 _keyHash, uint25
     }
     address constant linkToken= "0x326C977E6efc84E512bB9C30f76E30c160eD06FB";
     address constant vrfwrappperAddress= "";
+
     mapping(uint256 => Trait) public traits;
     
     mapping(uint256 => bool) public mintedTraits;
@@ -59,8 +62,7 @@ constructor(address vrfCoordinator, address _linkToken, bytes32 _keyHash, uint25
             emit Transfer(address(0), _to, _tokenId);
             emit Transfer(_to, address(0), _tokenId);
             transferFrom(_to, address(0), _tokenId);
-        }
-    }
+        }    
         
     function fullfillRandomness(bytes32 requestId, uint256 payment) public {
             _fulfillRandomness(requestId, payment);

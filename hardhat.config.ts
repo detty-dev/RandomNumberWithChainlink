@@ -5,8 +5,8 @@ import 'dotenv/config';
 const config: HardhatUserConfig = {
   solidity: "0.8.19",
   networks: {
-    sepolia: {
-      url:process.env.SEPOLIARPC,
+    goerli: {
+      url:process.env.GOERLIRPC,
       // @ts-ignore
       accounts:[process.env.PRIVATEKEY]
     },
